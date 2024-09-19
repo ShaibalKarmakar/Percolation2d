@@ -26,13 +26,17 @@ for rec_file in rec_files:
 
 corr_length_rec = {}
 for n in full_rec.keys():
-    p_vals = np.array(sorted(list(full_rec[n].keys())))
+    p_range = np.array(sorted(list(full_rec[n].keys())))
     density = []
     corr_length_rec[n] = {}
-    for p in p_vals:
+    p_vals = []
+    for p in p_range:
+        # if p>0.49:continue
+        p_vals.append(p)
         density.append(full_rec[n][p]["hits"]/full_rec[n][p]["trials_done"])
         corr_length_rec[n][p] = -n*(1/np.log(density[-1]))
     density = np.array(density)
+    p_vals = np.array(p_vals)
     print(p_vals, density)
     plt.plot(p_vals, density, '.-')
     plt.title(f"n = {n}")
