@@ -22,7 +22,7 @@ for rec_file in rec_files:
         full_rec[n][p]["trials_done"] += trials_done
         full_rec[n][p]["hits"] += hits
     
-# print(full_rec)
+print(full_rec)
 
 corr_length_rec = {}
 for n in full_rec.keys():
@@ -31,7 +31,7 @@ for n in full_rec.keys():
     corr_length_rec[n] = {}
     p_vals = []
     for p in p_range:
-        # if p>0.49:continue
+        if p<0.46: continue
         p_vals.append(p)
         density.append(full_rec[n][p]["hits"]/full_rec[n][p]["trials_done"])
         corr_length_rec[n][p] = -n*(1/np.log(density[-1]))
